@@ -170,7 +170,7 @@ class LoginController {
         $usuario = Usuario::findColum('token', $token);
 
         if(empty($usuario)) {
-            echo 'Token no valido';
+            // echo 'Token no valido';
             Usuario::setAlerta('error', 'Token no valido');
         } else {
             $usuario->confirmado = '1';
@@ -178,6 +178,8 @@ class LoginController {
             $usuario->guardar();
             Usuario::setAlerta('exito', 'Cuenta Comprobada');
         }
+
+        $alertas = Usuario::getAlertas();
 
         $router->render('auth/confirmar-cuenta', [
             'alertas' => $alertas
